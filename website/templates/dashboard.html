@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+            color: #fff; /* Changed to white for better contrast */
+        }
+
+        form {
+            max-width: 400px;
+            margin: 50px auto 20px auto; /* Added margin to the top */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 80%; /* Changed width to 80% */
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            color: #333;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold; /* Added bold font weight */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .bg-image {
+            background-image: url('static/img/eco.jpg');
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-image">
+        <h1>Dashboard</h1>
+        <button onclick="window.location.href = '{% url 'scraped_data' %}';" class="btn btn-primary">Go to Scraped Data List</button>
+
+        <form method="post" action= "{% url 'download_and_save' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="textfield1">Search</label>
+                <input type="text" class="form-control" id="search_query" name="search_query" aria-describedby="texthelp" placeholder="Search">
+            </div>
+            <button>Scrape Daraz</button>
+            {% comment %} <button type="submit" class="btn btn-primary">Scrape Daraz</button> {% endcomment %}
+        </form>
+        <!-- Add a button with an 'onclick' attribute to navigate to 'scraped_data/' -->
+    
+        <form>
+            <div class="form-group">
+                <label for="textfield2">Search</label>
+                <input type="text" class="form-control" id="textfield2" aria-describedby="texthelp" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-primary">Scrape Amazon</button>
+        </form>
+    </div>
+</body>
+</html>

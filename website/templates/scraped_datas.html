@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <title>Daraz Products</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .home-button {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            background-color: #3498db;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px 0 0 5px;
+        }
+
+        .home-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+    <body>
+    <a  href="{% url 'dashboard' %}" class="home-button"><h1>Home</h1> </a>
+    <h1>Scrape Product Data</h1>
+    {% comment %} <td>
+        <!-- Download button -->
+        <a href="{% url 'download_all_csv' %}">Download All Products as CSV</a>
+    </td> {% endcomment %}
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Delivery</th>
+                <th>Discounted Price</th>
+                <th>Actual Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% comment %} # Convert DataFrame to list of dictionaries
+            if we didint use 'products = product_data.to_dict(orient='records')' in views, then we have to do '{% for index, row in product_data.iterrows %}''
+            {% comment %} {% for index, row in product_data.iterrows %} 
+            <tr>
+                <td>{{ row.Product_Name }}</td>
+                <td>{{ row.Delivery }}</td>
+                <td>{{ row.Discounted_Price }}</td>
+                <td>{{ row.Actual_Price }}</td>
+            </tr>
+            {% endfor %} {% endcomment %}
+
+             {% for product in product_data %}
+            <tr>
+                <td>{{ product.Product_Name }}</td>
+                <td>{{ product.Delivery }}</td>
+                <td>{{ product.Discounted_Price }}</td>
+                <td>{{ product.Actual_Price }}</td>
+               
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html> 
+
